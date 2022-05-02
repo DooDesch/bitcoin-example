@@ -2,8 +2,14 @@
   <v-app dark>
     <v-app-bar app fixed flat>
       <v-container class="py-0 fill-height">
-        <v-btn v-for="link in links" :key="link" text>
-          {{ link }}
+        <v-btn
+          v-for="{ label, link } in links"
+          :key="link"
+          :to="link"
+          nuxt
+          text
+        >
+          {{ label }}
         </v-btn>
 
         <!-- <v-spacer></v-spacer>
@@ -35,7 +41,10 @@ export default {
   name: 'DefaultLayout',
   data() {
     return {
-      links: ['Dashboard'],
+      links: [
+        { label: 'Dashboard', link: '/' },
+        { label: 'Bitcoin-Details', link: 'bitcoin-details' },
+      ],
       title: 'Vuetify.js',
     }
   },
