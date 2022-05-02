@@ -42,8 +42,8 @@ export default {
   },
   mounted() {
     this.setArrayOfY()
-    this.minY = this.getMinMarketPrice()
-    this.maxY = this.getMaxMarketPrice()
+    // this.minY = this.getMinMarketPrice()
+    // this.maxY = this.getMaxMarketPrice()
   },
   methods: {
     setArrayOfY() {
@@ -53,12 +53,12 @@ export default {
 
       return this.arrayOfY
     },
-    getMinMarketPrice() {
-      return Math.min(...this.setArrayOfY())
-    },
-    getMaxMarketPrice() {
-      return Math.max(...this.setArrayOfY())
-    },
+    // getMinMarketPrice() {
+    //   return Math.min(...this.setArrayOfY())
+    // },
+    // getMaxMarketPrice() {
+    //   return Math.max(...this.setArrayOfY())
+    // },
   },
 }
 </script>
