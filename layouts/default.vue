@@ -46,6 +46,7 @@ export default {
         { label: 'Bitcoin Details', link: 'bitcoin-details' },
         { label: 'Bitcoin Umrechner', link: 'bitcoin-calculator' },
         { label: 'Bitcoin Diagramm', link: 'bitcoin-diagram' },
+        { label: 'Meine Bitcoin', link: 'bitcoin-user' },
       ],
       title: 'Vuetify.js',
     }
