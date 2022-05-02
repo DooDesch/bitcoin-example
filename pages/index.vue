@@ -1,79 +1,41 @@
 <template>
   <v-row justify="center" align="center">
-    <v-col cols="12" sm="8" md="6">
-      <v-card class="logo py-4 d-flex justify-center">
-        <NuxtLogo />
-        <VuetifyLogo />
-      </v-card>
+    <v-col cols="12">
       <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
+        <v-card-title class="headline"> Aktuelle Bitcoin-Preise </v-card-title>
         <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a
-              href="https://vuetifyjs.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              documentation </a
-            >.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a
-              href="https://chat.vuetifyjs.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="chat"
-            >
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a
-            href="https://nuxtjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt Documentation
-          </a>
-          <br />
-          <a
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Nuxt GitHub
-          </a>
+          <v-switch label="Show more data" v-model="showMoreData"></v-switch>
+          <v-simple-table dense>
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-left">Currency</th>
+                  <th class="text-left">Buy</th>
+                  <th class="text-left">Sell</th>
+                  <th v-if="showMoreData" class="text-left">15 minutes</th>
+                  <th v-if="showMoreData" class="text-left">Last</th>
+                </tr>
+              </thead>
+              <tbody v-if="bitcoinCurrencies">
+                <tr v-for="(currency, name) in bitcoinCurrencies" :key="name">
+                  <td>{{ name }}</td>
+                  <td>{{ addSeperators(currency.buy) }}</td>
+                  <td>{{ addSeperators(currency.sell) }}</td>
+                  <td v-if="showMoreData">
+                    {{ addSeperators(currency['15m']) }}
+                  </td>
+                  <td v-if="showMoreData">
+                    {{ addSeperators(currency.last) }}
+                  </td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire"> Continue </v-btn>
+          <v-btn @click="$nuxt.refresh()" color="primary" text> Refresh </v-btn>
+          <!-- <v-btn color="primary" nuxt to="/inspire" text> Continue </v-btn> -->
         </v-card-actions>
       </v-card>
     </v-col>
@@ -83,5 +45,21 @@
 <script>
 export default {
   name: 'IndexPage',
+  async asyncData({ $axios }) {
+    const bitcoinCurrencies = await $axios.$get(
+      'https://blockchain.info/ticker'
+    )
+    return { bitcoinCurrencies }
+  },
+  data() {
+    return {
+      showMoreData: false,
+    }
+  },
+  methods: {
+    addSeperators: (number) => {
+      return number.toLocaleString()
+    },
+  },
 }
 </script>
