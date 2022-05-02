@@ -8,6 +8,7 @@
 
 <script>
 export default {
+  name: 'BitcoinDetails',
   async asyncData({ $axios }) {
     const api = 'https://blockchain.info/q/'
 

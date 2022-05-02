@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'BitcoinDashboard',
   async asyncData({ $axios }) {
     const bitcoinCurrencies = await $axios.$get(
       'https://blockchain.info/ticker'
