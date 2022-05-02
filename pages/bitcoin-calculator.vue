@@ -33,7 +33,7 @@
           <v-row>
             <v-col cols="12" sm="6">
               <v-text-field
-                v-model="currentValueInBitcoins"
+                v-model="valueInBitcoins"
                 disabled
                 label="Bitcoins"
                 type="number"
@@ -75,7 +75,7 @@ export default {
     }
   },
   computed: {
-    currentValueInBitcoins() {
+    valueInBitcoins() {
       const factor = this.bitcoinCurrencies[this.currency.selected.short].buy
       return this.currency.value / factor
     },
