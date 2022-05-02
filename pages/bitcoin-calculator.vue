@@ -9,9 +9,7 @@
 </template>
 
 <script>
-import BitcoinCalculatorByCurrency from '~/components/BitcoinCalculatorByCurrency.vue'
 export default {
-  components: { BitcoinCalculatorByCurrency },
   name: 'BitcoinCalculator',
   async asyncData({ $axios }) {
     const bitcoinCurrencies = await $axios.$get(
