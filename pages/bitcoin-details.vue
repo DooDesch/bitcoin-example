@@ -1,27 +1,7 @@
 <template>
   <v-row justify="center" align="center">
     <v-col cols="12">
-      <v-card>
-        <v-card-title class="headline"> Bitcoin Details </v-card-title>
-        <v-card-text>
-          <v-simple-table>
-            <template #default>
-              <thead>
-                <tr>
-                  <th class="text-left">Name</th>
-                  <th class="text-right">Value</th>
-                </tr>
-              </thead>
-              <tbody v-if="stats">
-                <tr v-for="(value, name) in stats" :key="name">
-                  <td>{{ labels[name] || name }}</td>
-                  <td class="text-right">{{ addSeperators(value.data) }}</td>
-                </tr>
-              </tbody>
-            </template>
-          </v-simple-table>
-        </v-card-text>
-      </v-card>
+      <bitcoin-details-table :data="bitcoinStats"></bitcoin-details-table>
     </v-col>
   </v-row>
 </template>
@@ -39,42 +19,23 @@ export default {
     //   'hashrate',
     //   'getdifficulty',
     // ]
-    // const stats = {}
+    // const bitcoinStats = {}
     // await apisToCall.forEach(async (element) => {
-    //   stats[element] = await $axios.get(api + element)
+    //   bitcoinStats[element] = await $axios.get(api + element)
     // })
 
-    const stats = {}
+    const bitcoinStats = {}
 
-    stats.marketcap = await $axios.get(api + 'marketcap')
-    stats.totalbc = await $axios.get(api + 'totalbc')
-    stats['24hrtransactioncount'] = await $axios.get(
+    bitcoinStats.marketcap = await $axios.get(api + 'marketcap')
+    bitcoinStats.totalbc = await $axios.get(api + 'totalbc')
+    bitcoinStats['24hrtransactioncount'] = await $axios.get(
       api + '24hrtransactioncount'
     )
-    stats['24hrbtcsent'] = await $axios.get(api + '24hrbtcsent')
-    stats.hashrate = await $axios.get(api + 'hashrate')
-    stats.getdifficulty = await $axios.get(api + 'getdifficulty')
+    bitcoinStats['24hrbtcsent'] = await $axios.get(api + '24hrbtcsent')
+    bitcoinStats.hashrate = await $axios.get(api + 'hashrate')
+    bitcoinStats.getdifficulty = await $axios.get(api + 'getdifficulty')
 
-    return { stats }
-  },
-  data() {
-    return {
-      labels: {
-        marketcap: 'Marktkapitalisierung',
-        totalbc: 'Anzahl aller Bitcoins im Umlauf',
-        '24hrtransactioncount': 'Anzahl der Transaktionen in den letzten 24h',
-        '24hrbtcsent': 'Anzahl gesendeter Bitcoin in den letzten 24h',
-        hashrate: 'Aktuelle Hashrate',
-        getdifficulty: 'Aktueller Schwierigkeitsgrad',
-      },
-    }
-  },
-  methods: {
-    addSeperators: (number) => {
-      return number.toLocaleString()
-    },
+    return { bitcoinStats }
   },
 }
 </script>
-
-<style lang="scss" scoped></style>
