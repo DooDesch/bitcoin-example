@@ -43,7 +43,8 @@ export default {
     return {
       links: [
         { label: 'Dashboard', link: '/' },
-        { label: 'Bitcoin-Details', link: 'bitcoin-details' },
+        { label: 'Bitcoin Details', link: 'bitcoin-details' },
+        { label: 'Bitcoin Umrechner', link: 'bitcoin-calculator' },
       ],
       title: 'Vuetify.js',
     }
