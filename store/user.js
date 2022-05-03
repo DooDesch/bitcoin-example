@@ -5,7 +5,7 @@ export const state = () => ({
 
 export const mutations = {
   INIT_BITCOINS(state) {
-    state.bitcoins = parseInt(localStorage.getItem('user.bitcoins')) || 0
+    state.bitcoins = parseFloat(localStorage.getItem('user.bitcoins')) || 0
     state.bitcoinHistory = JSON.parse(
       localStorage.getItem('user.bitcoinHistory') || '[0]'
     )
@@ -21,8 +21,6 @@ export const mutations = {
       state.bitcoinHistory.shift()
     }
 
-    console.log(state.bitcoinHistory)
-
     localStorage.setItem(
       'user.bitcoinHistory',
       JSON.stringify(state.bitcoinHistory)
@@ -30,7 +28,8 @@ export const mutations = {
   },
 
   UPDATE_BITCOINS(state, bitcoins) {
-    const currentBitcoins = parseInt(localStorage.getItem('user.bitcoins')) || 0
+    const currentBitcoins =
+      parseFloat(localStorage.getItem('user.bitcoins')) || 0
     this.commit('user/SET_BITCOINS', currentBitcoins + bitcoins)
   },
 
@@ -44,7 +43,8 @@ export const mutations = {
   },
 
   UPDATE_BITCOINS_BY_CURRENCY(state, { course, amount }) {
-    const currentBitcoins = parseInt(localStorage.getItem('user.bitcoins')) || 0
+    const currentBitcoins =
+      parseFloat(localStorage.getItem('user.bitcoins')) || 0
 
     this.commit('user/SET_BITCOINS', currentBitcoins + amount / course)
   },
@@ -80,6 +80,7 @@ export const actions = {
       const ticker = await this.$axios.$get('https://blockchain.info/ticker')
       currencyCourse = ticker[currency].buy
     }
+
     commit('UPDATE_BITCOINS_BY_CURRENCY', { course: currencyCourse, amount })
   },
 }
