@@ -1,8 +1,8 @@
 <template>
   <v-card color="grey darken-3">
-    <v-card-title class="headline"> Aktuelle Bitcoin-Preise </v-card-title>
+    <v-card-title> Aktuelle Bitcoin-Preise </v-card-title>
     <v-card-text>
-      <v-switch v-model="showMoreData" label="Show more data"></v-switch>
+      <v-switch v-model="showMoreData" label="Mehr Daten anzeigen"></v-switch>
       <v-simple-table dense>
         <template #default>
           <thead>
