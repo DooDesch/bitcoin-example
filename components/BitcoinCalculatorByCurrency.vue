@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card color="grey darken-3">
     <v-card-title class="headline"> Bitcoin Umrechner </v-card-title>
     <v-card-text>
       <v-row>
