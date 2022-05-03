@@ -1,17 +1,28 @@
 <template>
   <v-app dark>
+    <v-app-bar dense fixed app clipped-left>
+      <v-app-bar-nav-icon
+        v-if="!$vuetify.breakpoint.smAndUp"
+        @click.stop="drawer = !drawer"
+      />
+      <v-app-bar-title
+        :class="{ 'left-title-spacer pl-3': $vuetify.breakpoint.smAndUp }"
+        v-text="'Bitcoin Tool'"
+      />
+    </v-app-bar>
+
     <v-navigation-drawer
       v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
+      :permanent="$vuetify.breakpoint.smAndUp"
       fixed
+      clipped
       app
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in links"
           :key="i"
-          :to="item.to"
+          :to="item.link"
           router
           exact
         >
@@ -24,41 +35,18 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
-      <v-toolbar-title v-text="title" />
-      <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
-    </v-app-bar>
-    <v-main>
+
+    <v-main class="mt-2">
       <v-container>
-        <Nuxt />
+        <v-row>
+          <v-col cols="12" align="center">
+            <v-sheet min-height="70vh" max-width="1400" rounded="lg">
+              <Nuxt />
+            </v-sheet>
+          </v-col>
+        </v-row>
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
   </v-app>
 </template>
 
@@ -67,26 +55,33 @@ export default {
   name: 'DefaultLayout',
   data() {
     return {
-      clipped: false,
       drawer: false,
-      fixed: false,
-      items: [
+      links: [
+        { title: 'Dashboard', link: '/', icon: 'mdi-view-dashboard' },
         {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
+          title: 'Bitcoin Details',
+          link: 'bitcoin-details',
+          icon: 'mdi-view-list',
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
+          title: 'Bitcoin Umrechner',
+          link: 'bitcoin-calculator',
+          icon: 'mdi-calculator-variant',
         },
+        {
+          title: 'Bitcoin Diagramm',
+          link: 'bitcoin-diagram',
+          icon: 'mdi-chart-line',
+        },
+        { title: 'Meine Bitcoin', link: 'bitcoin-user', icon: 'mdi-account' },
       ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Vuetify.js',
     }
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.left-title-spacer {
+  margin-left: 256px;
+}
+</style>
