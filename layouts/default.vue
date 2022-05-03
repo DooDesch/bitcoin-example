@@ -1,24 +1,29 @@
 <template>
   <v-app dark>
-    <v-app-bar app fixed flat>
-      <v-container class="py-0 fill-height">
-        <v-btn
-          v-for="{ label, link } in links"
-          :key="link"
-          :to="link"
-          nuxt
-          text
-        >
-          {{ label }}
-        </v-btn>
-
-        <!-- <v-spacer></v-spacer>
-
-        <v-responsive max-width="260">
-          <v-btn text> Meine Bitcoin </v-btn>
-        </v-responsive> -->
-      </v-container>
+    <v-app-bar dense fixed app clipped-left>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title v-text="'Bitcoin Tool'" />
     </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" fixed clipped app>
+      <v-list>
+        <v-list-item
+          v-for="(item, i) in links"
+          :key="i"
+          :to="item.link"
+          router
+          exact
+        >
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title v-text="item.title" />
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
     <v-main class="mt-2">
       <v-container>
         <v-row>
@@ -30,9 +35,6 @@
         </v-row>
       </v-container>
     </v-main>
-    <!-- <v-footer :absolute="!fixed" app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer> -->
   </v-app>
 </template>
 
@@ -41,14 +43,26 @@ export default {
   name: 'DefaultLayout',
   data() {
     return {
+      drawer: true,
       links: [
-        { label: 'Dashboard', link: '/' },
-        { label: 'Bitcoin Details', link: 'bitcoin-details' },
-        { label: 'Bitcoin Umrechner', link: 'bitcoin-calculator' },
-        { label: 'Bitcoin Diagramm', link: 'bitcoin-diagram' },
-        { label: 'Meine Bitcoin', link: 'bitcoin-user' },
+        { title: 'Dashboard', link: '/', icon: 'mdi-view-dashboard' },
+        {
+          title: 'Bitcoin Details',
+          link: 'bitcoin-details',
+          icon: 'mdi-view-list',
+        },
+        {
+          title: 'Bitcoin Umrechner',
+          link: 'bitcoin-calculator',
+          icon: 'mdi-calculator-variant',
+        },
+        {
+          title: 'Bitcoin Diagramm',
+          link: 'bitcoin-diagram',
+          icon: 'mdi-chart-line',
+        },
+        { title: 'Meine Bitcoin', link: 'bitcoin-user', icon: 'mdi-account' },
       ],
-      title: 'Vuetify.js',
     }
   },
 }
