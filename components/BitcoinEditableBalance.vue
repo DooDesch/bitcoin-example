@@ -1,6 +1,6 @@
 <template>
-  <v-card color="grey darken-3 ml-3">
-    <v-card-title primary-title> Balance </v-card-title>
+  <v-card color="grey darken-3">
+    <v-card-title primary-title> Kontostand </v-card-title>
     <v-card-title>
       <v-spacer></v-spacer>
       <v-icon class="mr-2" color="#f7931a">mdi-bitcoin</v-icon>
@@ -48,10 +48,10 @@
         text
         @click="editBitcoins"
       >
-        {{ update ? 'Update Bitcoins' : 'Edit Bitcoins' }}
+        {{ update ? 'Stand updaten' : 'Bearbeiten' }}
       </v-btn>
       <v-btn v-if="update" color="error" text @click="update = !update">
-        Cancel
+        Abbrechen
       </v-btn>
     </v-card-actions>
   </v-card>
