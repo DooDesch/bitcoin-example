@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card color="grey darken-3">
     <v-card-title class="headline"> Aktuelle Bitcoin-Preise </v-card-title>
     <v-card-text>
       <v-switch v-model="showMoreData" label="Show more data"></v-switch>
