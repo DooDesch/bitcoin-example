@@ -1,11 +1,23 @@
 <template>
   <v-app dark>
     <v-app-bar dense fixed app clipped-left>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title v-text="'Bitcoin Tool'" />
+      <v-app-bar-nav-icon
+        v-if="!$vuetify.breakpoint.smAndUp"
+        @click.stop="drawer = !drawer"
+      />
+      <v-app-bar-title
+        :class="{ 'left-title-spacer pl-3': $vuetify.breakpoint.smAndUp }"
+        v-text="'Bitcoin Tool'"
+      />
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" fixed clipped app>
+    <v-navigation-drawer
+      v-model="drawer"
+      :permanent="$vuetify.breakpoint.smAndUp"
+      fixed
+      clipped
+      app
+    >
       <v-list>
         <v-list-item
           v-for="(item, i) in links"
@@ -27,8 +39,8 @@
     <v-main class="mt-2">
       <v-container>
         <v-row>
-          <v-col>
-            <v-sheet min-height="70vh" rounded="lg">
+          <v-col cols="12" align="center">
+            <v-sheet min-height="70vh" max-width="1400" rounded="lg">
               <Nuxt />
             </v-sheet>
           </v-col>
@@ -43,7 +55,7 @@ export default {
   name: 'DefaultLayout',
   data() {
     return {
-      drawer: true,
+      drawer: false,
       links: [
         { title: 'Dashboard', link: '/', icon: 'mdi-view-dashboard' },
         {
@@ -67,3 +79,9 @@ export default {
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.left-title-spacer {
+  margin-left: 256px;
+}
+</style>

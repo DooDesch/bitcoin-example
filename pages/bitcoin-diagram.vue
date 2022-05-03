@@ -1,6 +1,6 @@
 <template>
-  <v-row justify="center" class="px-3">
-    <v-col cols="12" sm="8">
+  <v-row align="center" class="px-3">
+    <v-col cols="12" align="center">
       <bitcoin-sparkline-diagram :data="chartData"></bitcoin-sparkline-diagram>
     </v-col>
   </v-row>
