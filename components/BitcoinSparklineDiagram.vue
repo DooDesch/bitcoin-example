@@ -1,6 +1,6 @@
 <template>
   <v-card class="text-center" max-width="600" color="grey darken-3">
-    <v-card-title class="headline"> Bitcoin Diagramm </v-card-title>
+    <v-card-title class="headline"> Bitcoin Diagramm (Sparkline) </v-card-title>
     <v-card-text>
       <sparkline-diagram currency="$" :data="arrayOfY"></sparkline-diagram>
     </v-card-text>

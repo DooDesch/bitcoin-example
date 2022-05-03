@@ -3,6 +3,9 @@
     <v-col cols="12" align="center">
       <bitcoin-sparkline-diagram :data="chartData"></bitcoin-sparkline-diagram>
     </v-col>
+    <v-col cols="12">
+      <bitcoin-highchart-diagram :data="chartData"></bitcoin-highchart-diagram>
+    </v-col>
   </v-row>
 </template>
 
