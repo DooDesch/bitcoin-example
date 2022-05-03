@@ -1,5 +1,5 @@
 <template>
-  <v-row justify="center">
+  <v-row justify="center" class="px-3">
     <v-col cols="12" sm="6">
       <bitcoin-editable-balance
         :bitcoin-currencies="bitcoinCurrencies"
