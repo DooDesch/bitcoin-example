@@ -90,6 +90,9 @@ export default {
       return this.$store.state.user.bitcoins
     },
   },
+  created() {
+    this.$store.dispatch('user/initBitcoins')
+  },
   methods: {
     editBitcoins() {
       if (this.loading) return
@@ -117,9 +120,6 @@ export default {
         this.currency.value = 0
       }
     },
-  },
-  created() {
-    this.$store.dispatch('user/initBitcoins')
   },
 }
 </script>
