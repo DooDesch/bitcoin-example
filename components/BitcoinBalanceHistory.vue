@@ -4,6 +4,7 @@
     <v-card-text>
       <sparkline-diagram
         :data="bitcoinHistory"
+        currency="₿ "
         color="green"
       ></sparkline-diagram>
     </v-card-text>
