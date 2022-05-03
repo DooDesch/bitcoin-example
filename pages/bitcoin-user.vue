@@ -2,7 +2,7 @@
   <v-row justify="center">
     <v-col cols="12" sm="6">
       <bitcoin-editable-balance
-        :bitcoinCurrencies="bitcoinCurrencies"
+        :bitcoin-currencies="bitcoinCurrencies"
       ></bitcoin-editable-balance>
     </v-col>
     <v-col cols="12" sm="6">
