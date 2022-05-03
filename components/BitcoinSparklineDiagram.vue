@@ -2,17 +2,7 @@
   <v-card class="text-center" max-width="600">
     <v-card-title class="headline"> Bitcoin Diagramm </v-card-title>
     <v-card-text>
-      <v-sheet color="rgba(0,0,0, .12)">
-        <v-sparkline
-          v-if="arrayOfY.length"
-          :value="arrayOfY"
-          height="100"
-          padding="24"
-          stroke-linecap="round"
-        >
-          <template #label="item"> ${{ item.value }} </template>
-        </v-sparkline>
-      </v-sheet>
+      <sparkline-diagram currency="$" :data="arrayOfY"></sparkline-diagram>
     </v-card-text>
 
     <v-card-text>
@@ -47,9 +37,9 @@ export default {
   },
   methods: {
     setArrayOfY() {
-      if (this.arrayOfY.length === 0) {
-        this.arrayOfY = this.data.values.map((d) => d.y)
-      }
+      // if (this.arrayOfY.length === 0) {
+      this.arrayOfY = this.data.values.map((d) => d.y)
+      // }
 
       return this.arrayOfY
     },
